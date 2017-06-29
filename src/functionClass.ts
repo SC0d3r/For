@@ -1,14 +1,19 @@
+import { ReturnsOfCounter } from './returnsOfCounterClass';
 import { Counter, COUNTER } from './types';
 export class FunctionClass implements Counter {
-    constructor(private func : Function){}
-    
+    constructor(private func: Function) { }
+
     getCounter(): COUNTER {
         return {
-            do : (cb : (returns : any) => void) => {
-                let result : any;
-                while(result = this.func()){
-                    cb(result);
+            do: (cb?: (returns: any) => any) => {
+                let result: any;
+                let changesOnArray : any[] = [];
+                let i = 0;
+                while (result = this.func()) {
+                    let ret = cb && cb(result);
+                    if(ret) changesOnArray[i++] = ret;
                 }
+                return (new ReturnsOfCounter<number>(changesOnArray)).getReturns();
             }
         }
     }
