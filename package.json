@@ -1,13 +1,18 @@
 {
   "name": "for-ease",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a simple library for itrating over anything",
   "main": "./dist/for.js",
   "scripts": {
     "test": "jasmine-node-karma ./dist/spec/for.spec.js --color",
     "bundle": "browserify ./dist/index.js -o ./bundle/bundle.js"
   },
-  "keywords": ["For" , "Belt" , "Utility" , "Iteration"],
+  "keywords": [
+    "For",
+    "Belt",
+    "Utility",
+    "Iteration"
+  ],
   "author": "SC0d3r",
   "license": "MIT",
   "devDependencies": {
