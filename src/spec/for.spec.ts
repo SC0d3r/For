@@ -72,12 +72,12 @@ describe('For : ', () => {
         });
 
         it('shouldd recieve a function and call that function till it return falsy and pass the return of that function to do', () => {
-            function gen(array: string[]) {
+            function reverser(array: string[]) {
                 return function () {
                     return array.pop();
                 }
             }
-            let f = gen(['god', 'sake']);
+            let f = reverser(['god', 'sake']);
             let result: string = '';
             For(f).do((returns: string) => {
                 result += returns;
@@ -292,7 +292,7 @@ describe('For : ', () => {
             expect(a).toEqual(newA);
         });
 
-        it('should modify the array with return of callbakc function', () => {
+        it('should modify the array with return of callback function', () => {
             let originalArr = [1, 2, 3];
             let result = For(originalArr).do(() => 2).returns;
             expect(originalArr).toEqual([1, 2, 3]);
@@ -352,7 +352,7 @@ describe('For : ', () => {
 
 
     describe('.do().prepend', () => {
-        it('should recieve an array and append the result to end of it', () => {
+        it('should recieve an array and prepends the result in front of it', () => {
             let originalArray = [1, 2, 3, 4];
             let resultArray: any[] = [56, 87];
             For(originalArray).do(() => 2).prepend(resultArray);
