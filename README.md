@@ -18,13 +18,13 @@ $ npm i --save for
 
 ### in  *vanilla javascript*
 ```javascript
-const For = require('for');
+const For = require('for-ease');
 
 ```
 
 ### in  Typescript
 ```javascript
-import For = require('for');
+import For = require('for-ease');
 ```
 
 # Examples
