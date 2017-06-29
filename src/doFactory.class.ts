@@ -1,3 +1,4 @@
+import { ObjectArrayClass } from './objectArrayClass';
 import { FunctionClass } from './functionClass';
 import { ObjectClass } from './objectClass';
 import { StringArrayClass } from './stringArrayClass';
@@ -32,13 +33,15 @@ export class DoFactory implements Counter {
             } else if (typeof this.mixedObj[0] === 'string') {
                 
                 this.counter = (new StringArrayClass(<string[]>this.mixedObj)).getCounter();
+            }else if(typeof this.mixedObj[0] === 'object'){
+                this.counter = (new ObjectArrayClass(<Object[]>this.mixedObj)).getCounter();
             }
 
         } else if (typeof this.mixedObj === 'object') {
             this.counter = (new ObjectClass(this.mixedObj)).getCounter();
         }
-    }
 
+    }
 
     public getCounter(): COUNTER {
         return this.counter;
