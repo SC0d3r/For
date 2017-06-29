@@ -31,7 +31,7 @@ import For = require('for');
 
 ## `do` method :
 
- * #### Recieves a `number` and passes the current `index` to the callback
+* #### Recieves a `number` and passes the current `index` to the callback
 ```javascript
 function job(index){console.log(index);}
 
