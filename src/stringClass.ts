@@ -1,13 +1,18 @@
+import { ReturnsOfCounter } from './returnsOfCounterClass';
 import { Counter, COUNTER } from './types';
 export class StringClass implements Counter {
     constructor(private str: string) { }
 
     getCounter(): COUNTER {
         return {
-            do: (cb: (currentChar: string, index: number, str: string) => void) => {
-                for (var i = 0; i < this.str.length; i++) {
-                    cb(this.str[i] , i , this.str);
+            do: (cb?: (index: number, currentChar: string, str: string) => string) => {
+                let changedArray : string[] = [];
+                let str = this.str;
+                for (var i = 0; i < str.length; i++) {
+                    let ret = cb && cb(i, str[i], str);
+                    changedArray[i] = ret || str[i];
                 }
+                return (new ReturnsOfCounter<string>(changedArray)).getReturns();
             }
         }
     }
