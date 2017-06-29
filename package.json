@@ -1,0 +1,17 @@
+{
+  "name": "for",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundle": "browserify ./dist/index.js -o ./bundle/bundle.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jasmine": "^2.5.53",
+    "browserify": "^14.4.0"
+  }
+}
