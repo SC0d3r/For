@@ -1,4 +1,4 @@
-import { For } from "../for";
+import For = require("../for");
 
 describe('For : ', () => {
     describe('.do : ', () => {

@@ -1,5 +1,5 @@
 import { Mixed, COUNTER } from './types';
-import { For } from "./for";
+import For = require('./for');
 
 // for using in browser uncomment bellow and run > npm run bundle
 

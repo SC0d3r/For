@@ -8,7 +8,7 @@ import { Mixed, COUNTER, RETURN, EnteringTillFactory, TILLS } from "./types";
 
 type ForReturns = COUNTER & RETURN & TILLS;
 
-export function For(mixed: Mixed) : ForReturns{
+function For(mixed: Mixed) : ForReturns{
     const counter = (new DoFactory(mixed)).getCounter();
     const returns = (new ReturnFactory(<string[] | number[]>mixed)).getReturn();
     const tills = (new TillFactory(<EnteringTillFactory>mixed)).getTills();
@@ -16,3 +16,4 @@ export function For(mixed: Mixed) : ForReturns{
     const combinedFactories : ForReturns = Object.assign({} , counter , returns , tills , returnMethods);
     return combinedFactories;
 }
+export = For;
