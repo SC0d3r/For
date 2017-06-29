@@ -31,14 +31,14 @@ import For = require('for');
 
 ## `do` method :
 
-* #### Recieves a `number` and passes the current `index` to the callback
+##### Recieves a `number` and passes the current `index` to the callback
 ```javascript
 function job(index){console.log(index);}
 
 For(5).do(job);// output : 0,1,2,3,4
 ```
 
-* #### Recieves an array of `numbers` or `strings` or `objects` and passes (`index`, `CurrentElement` , `CopyOfArray`) to the callback
+##### Recieves an array of `numbers` or `strings` or `objects` and passes (`index`, `CurrentElement` , `CopyOfArray`) to the callback
 
 ```javascript
 For([2, 3]).do((index : number, currentElement: number, copyOfArr: number[]) => {
@@ -46,7 +46,7 @@ For([2, 3]).do((index : number, currentElement: number, copyOfArr: number[]) => 
 });
 ```
 
-* #### Recieves a `string` and passes (`index` , `currentCharacter` , `stringItself`) to the callback
+##### Recieves a `string` and passes (`index` , `currentCharacter` , `stringItself`) to the callback
 
 ```javascript
 For('godSake').do((index: number, char: string, str: string) => {
@@ -54,7 +54,7 @@ For('godSake').do((index: number, char: string, str: string) => {
 });
 ```
 
-* #### Recieves an `obj` and passes (`key` , `value`) to the callback
+##### Recieves an `obj` and passes (`key` , `value`) to the callback
 
 ```javascript
 let obj = {
@@ -65,7 +65,7 @@ For(obj).do((key: string, value: string) => {
     // Your Code
 });
 ```
-* #### Recieves a `function` and calls that function till it returns `falsy` and passes the `return` of that function to the callback
+##### Recieves a `function` and calls that function till it returns `falsy` and passes the `return` of that function to the callback
 
 ```javascript
 function reverser(array: string[]) {
@@ -93,7 +93,7 @@ let result = For(func).do(x => x).returns;
 
 ## `returnSum` method :
 
-* #### Recieves an array of `numbers` or `strings` and return `sum` of array items
+##### Recieves an array of `numbers` or `strings` and return `sum` of array items
 
 ```javascript
 const result = For([1, 2, 3]).returnSum();
@@ -102,7 +102,7 @@ const result = For([1, 2, 3]).returnSum();
 
 ## `returnUniq` method :
 
-* #### Recieves an array of `numbers` and returns just the `unique` ones
+##### Recieves an array of `numbers` and returns just the `unique` ones
 
 ```javascript
 const result = For([1,2,3,1]).returnUniq();
@@ -111,7 +111,7 @@ const result = For([1,2,3,1]).returnUniq();
 
 ## `returnSorted` method :
 
-* #### Recieves an array and returns `sorted` array **(`Does not affect the original array`)**
+##### Recieves an array and returns `sorted` array **(`Does not affect the original array`)**
 
 ```javascript
 const originalArr = [1,2,-1];
@@ -122,7 +122,7 @@ const result = For(originalArr).returnSorted();
 
 ## `tillKey` method :
 
-* #### Recieves a condition and returns `elements` till condition is true (`key` is `index` in array not the `elements`)
+##### Recieves a condition and returns `elements` till condition is true (`key` is `index` in array not the `elements`)
 
 #### Conditions
 
@@ -181,7 +181,7 @@ For(['1', '2', '3', '5']).tillKey('>= 2').do((index: number, val: number, arr: n
 });
 // sum is '35'
 ```
-* #### With `Objects`
+##### With `Objects`
 
 ```javascript
 let sum = '';
@@ -195,7 +195,7 @@ For(arr).tillKey('= 1').do((index: number, val: { name: string }, arr: number[])
 //sum is 'superman' 
 ```
 
-* #### returns the result of `condition` with `.returns` 
+##### returns the result of `condition` with `.returns` 
 
 ```javascript
 let result = For([0,1,2,3]).tillKey('<= 2').returns;
@@ -205,11 +205,11 @@ let result = For([0,1,2,3]).tillKey('<= 2').returns;
 
 ## `tillValue` method :
 
-* #### Recieves a condition and returns `elements` till condition is true 
+##### Recieves a condition and returns `elements` till condition is true 
 
-* #### `Note` : condtions as above
+##### `Note` : condtions as above
 
-* #### usage : 
+##### usage : 
 
 ```javascript
 let sum = 0;
@@ -226,7 +226,7 @@ For([1, 2, 3, 4]).tillValue('= 2').do((index: number, val: number, arr: number[]
 //sum is 2
 ```
 
-* #### With `Strings`
+##### With `Strings`
 
 ```javascript
 let sum = '';
@@ -236,7 +236,7 @@ For(['1', '2', '3', '5']).tillValue('>= 2').do((index: number, val: number, arr:
 //sum is '235'
 ```
 
-* #### `Special Case : ` Objects
+##### `Special Case : ` Objects
 ##### for object you have to add the key to the condition
 
 ```javascript
@@ -249,7 +249,7 @@ For(arr).tillValue('age > 19').do((index: number, val: { name: string, age: numb
 //sum is 56 
 
 ```
-* #### returns the result of `condition` with `.returns`
+##### returns the result of `condition` with `.returns`
 
 ```javascript
 let result = For([1,2,3,4,5]).tillValue('<= 2').returns;
@@ -270,7 +270,7 @@ let copyOfArray = For(originalArray).do().returns;
 let copyOfArray = For(originalArray).returns;
 ```
 
-* #### `Note :` if the callback `returns` sth it will be placed in the result array (but not changing the original array)
+##### `Note :` if the callback `returns` sth it will be placed in the result array (but not changing the original array)
 
 ```javascript
 let originalArr = [1, 2, 3];
@@ -279,7 +279,7 @@ let result = For(originalArr).do(() => 2).returns;
 //result is [2,2,2];
 ```
 
-* #### Returns an array of [key,value] pairs of an object
+##### Returns an array of [key,value] pairs of an object
 
 ```javascript
 let obj = { name: 'superman', age: 34, phone: 34234 };
@@ -292,7 +292,7 @@ let result = For(obj).returns;
 // either way result will be [['name', 'superman'], ['age', 34], ['phone', 34234]]
 ```
 
-* #### Returns indexes if we give `For` only a `number`
+##### Returns indexes if we give `For` only a `number`
 
 ```javascript
 let result = For(4).do().returns;
@@ -304,14 +304,14 @@ let result = For(4).returns;
 //either way result will be [0,1,2,3]
 ```
 
-* #### Can be used to create an array of predefined size
+##### Can be used to create an array of predefined size
 
 ```javascript
 let result = For(3).do(() => 0).returns;
 //result is [0,0,0]
 ```
 
-* #### Can be used to return the result of passed function
+##### Can be used to return the result of passed function
 
 ```javascript
 function reverser(array: string[]) {
@@ -329,7 +329,7 @@ result = For(f).do((ret => ret)).returns;
 
 ## `assign` Method
 
-* #### Recieves an array and assigns the result to it (**not** `modifying` the `original` array)
+##### Recieves an array and assigns the result to it (**not** `modifying` the `original` array)
 
 ```javascript
 let originalArray = [1, 2, 3, 4];
@@ -341,7 +341,7 @@ For(originalArray).do(() => 2).assign(resultArray);
 
 ## `append` Method
 
-* #### Recieves an array and appends the result to end of it (**not** `modifying` the `original` array)
+##### Recieves an array and appends the result to end of it (**not** `modifying` the `original` array)
 
 ```javascript
 const originalArray = [1, 2, 3, 4];
@@ -353,7 +353,7 @@ For(originalArray).do(x => x + 1).append(resultArray);
 
 ## `prepend` Method 
 
-* #### Recieves an array and prepends the result in front of it(**not** `modifying` the `original` array)
+##### Recieves an array and prepends the result in front of it(**not** `modifying` the `original` array)
 
 ```javascript
 let originalArray = [1, 2, 3, 4];
