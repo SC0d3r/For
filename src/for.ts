@@ -5,7 +5,6 @@ import { DoFactory } from './doFactory.class';
 import { Mixed, COUNTER, RETURN, EnteringTillFactory, TILLS } from "./types";
 
 
-
 type ForReturns = COUNTER & RETURN & TILLS;
 
 function For(mixed: Mixed) : ForReturns{

@@ -359,8 +359,8 @@ For(originalArray).do(x => x + 1).append(resultArray);
 let originalArray = [1, 2, 3, 4];
 let resultArray: any[] = [56, 87];
 
-For(originalArray).do(x => x * x).prepend(resultArray);
-//resultArray is [1, 4, 9, 16, 56, 87]
+For(originalArray).do((index , value) => value * value).prepend(resultArray);
+//resultArray is [ 16, 9, 4, 1, 56, 87 ]
 ```
 
 
