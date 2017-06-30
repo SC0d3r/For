@@ -347,7 +347,7 @@ For(originalArray).do(() => 2).assign(resultArray);
 const originalArray = [1, 2, 3, 4];
 let resultArray: any[] = [56, 87];
 
-For(originalArray).do(x => x + 1).append(resultArray);
+For(originalArray).do((index,value) => value + 1).append(resultArray);
 //resultArray is [56, 87, 2, 3, 4, 5]
 ```
 
