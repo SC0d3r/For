@@ -13,7 +13,7 @@ an npm package for easing the `iterations` over objs , strings , ...
 ## Installation
 using `npm`
 ```
-$ npm i --save for
+$ npm i --save for-ease
 ```
 
 ### in  *vanilla javascript*
