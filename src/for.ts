@@ -7,19 +7,23 @@ import { DoFactory } from './doFactory/doFactory.class';
 import { COUNTER, RETURN, TILLS, Mixed, EnteringTillFactory } from "./interfaces/types";
 
 type ForReturns = COUNTER & RETURN & TILLS;
-type FOR_FUNC = (Mixed) => COUNTER & RETURN & TILLS;
 
 let For: any;
 
-For = (mixed: Mixed): ForReturns => {
-    let copyOfMixed: any[] = [];
-    if (For.__copy && Array.isArray(mixed)) copyOfMixed = returnCopyOfGivenArray(mixed);
-    else copyOfMixed = <any>mixed;
+const doFactory = new DoFactory();
+const returnFactory = new ReturnFactory();
+const tillFactory = new TillFactory();
+const returnsOfCounterFactory = new ReturnsOfCounter();
 
-    const counter = (new DoFactory(copyOfMixed)).getCounter();
-    const returns = (new ReturnFactory(<string[] | number[]>copyOfMixed)).getReturn();
-    const tills = (new TillFactory(<EnteringTillFactory>copyOfMixed)).getTills();
-    const returnMethods = (new ReturnsOfCounter<any>(<any>copyOfMixed)).getReturns();
+For = (mixed: Mixed): ForReturns => {
+    let maybeCopyOfMixed: any[] = [];
+    if (For.__copy && Array.isArray(mixed)) maybeCopyOfMixed = mixed.slice();
+    else maybeCopyOfMixed = <any>mixed;
+
+    const counter = doFactory.setMixedObj(maybeCopyOfMixed).getCounter();
+    const returns = returnFactory.setMixedObj(<string[] | number[]>maybeCopyOfMixed).getReturn();
+    const tills = tillFactory.setMixedObj(<EnteringTillFactory>maybeCopyOfMixed).getTills();
+    const returnMethods = returnsOfCounterFactory.setMixedObj(<any>maybeCopyOfMixed).getReturns();
     const combinedFactories: ForReturns = Object.assign({}, counter, returns, tills, returnMethods);
     return combinedFactories;
 }
@@ -33,12 +37,6 @@ For.disableCopy = () => {
 For.enableCopy = () => {
     For.__copy = true;
 }
-
-function returnCopyOfGivenArray(arr : any[]){
-    return arr.slice();
-}
-
-
 
 
 export = For;
