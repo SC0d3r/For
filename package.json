@@ -1,6 +1,6 @@
 {
   "name": "for-ease",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "a simple library for itrating over anything",
   "main": "./dist/for.js",
   "scripts": {
