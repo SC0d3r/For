@@ -1,4 +1,5 @@
-import { Return, RETSUM } from './types';
+import { Return, RETSUM } from "../interfaces/types";
+
 export class ReturnSumClass implements Return {
 
     constructor(private vals: string[] | number[]) { }

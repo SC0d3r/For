@@ -1,7 +1,8 @@
 import { ReturnSortedClass } from './returnSortedClass';
 import { ReturnUniqClass } from './returnUniqClass';
 import { ReturnSumClass } from './returnSumClass';
-import { Mixed, Return, RETURN } from "./types";
+
+import { Return, RETURN } from "../interfaces/types";
 
 export class ReturnFactory implements Return {
     private factoryReturn : RETURN;

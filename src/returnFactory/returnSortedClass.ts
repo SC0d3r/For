@@ -1,6 +1,7 @@
-import { Return ,  RETSORTED} from './types';
 
-export class ReturnSortedClass implements Return{
+import { Return, RETSORTED } from "../interfaces/types";
+
+export class ReturnSortedClass implements Return {
     private sorted : string[] | number[];
     constructor(private array : string[] | number[]){}
 
