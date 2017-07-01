@@ -10,7 +10,6 @@ export class TillValueClass implements Tills {
         return {
             tillValue: (condition: string): COUNTER & Returns => {
                 let condtionedArrayOrObj: any[] | Object = this.mixed;
-                if (Array.isArray(this.mixed)) condtionedArrayOrObj = this.mixed.slice();
 
                 let counterForThisType: COUNTER = (new DoFactory(this.mixed)).getCounter();
                 // console.log(counterForThisType);
