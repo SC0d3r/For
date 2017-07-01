@@ -1,6 +1,8 @@
 import { TillValueClass } from './tillValueClass';
 import { TillKeyClass } from './tillKeyClass';
-import { EnteringTillFactory, Tills, TillKey, TILLS } from "./types";
+
+import { Tills, EnteringTillFactory, TILLS } from "../interfaces/types";
+
 
 export class TillFactory implements Tills{
     constructor(private mixed: EnteringTillFactory) {
