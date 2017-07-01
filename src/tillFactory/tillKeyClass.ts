@@ -28,7 +28,7 @@ export class TillKeyClass implements Tills {
     private parseConditionOnThisVal(condition: string, onWhat: string | number): boolean {
         let [cond, value] = condition.trim().split(' ');
 
-        let val: any = parseInt(value);
+        let val: any = parseFloat(value);
         if (isNaN(val)) {
             val = value;
         }

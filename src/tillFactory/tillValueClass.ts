@@ -29,7 +29,7 @@ export class TillValueClass implements Tills {
         let cond : string, value : string | number, keyInObj : string = '';
         [cond, value] = condition.trim().split(' ');
         if(typeof this.mixed[0] === 'object') [keyInObj , cond , value] = condition.trim().split(' ');
-        let val: any = parseInt(value);
+        let val: any = parseFloat(value);
         if (isNaN(val)) {
             val = value;
         }
