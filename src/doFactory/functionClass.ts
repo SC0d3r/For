@@ -1,5 +1,6 @@
-import { ReturnsOfCounter } from './returnsOfCounterClass';
-import { Counter, COUNTER } from './types';
+import { ReturnsOfCounter } from './../returnsOfCounterClass';
+import { Counter, COUNTER } from "../interfaces/types";
+
 export class FunctionClass implements Counter {
     constructor(private func: Function) { }
 

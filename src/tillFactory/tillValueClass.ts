@@ -1,6 +1,7 @@
-import { ReturnsOfCounter } from './returnsOfCounterClass';
-import { Tills, EnteringTillFactory, TillValue, COUNTER, Returns } from './types';
-import { DoFactory } from './doFactory.class';
+
+import { Tills, EnteringTillFactory, TillValue, COUNTER, Returns } from "../interfaces/types";
+import { DoFactory } from "../doFactory/doFactory.class";
+import { ReturnsOfCounter } from "../returnsOfCounterClass";
 
 export class TillValueClass implements Tills {
     constructor(private mixed: EnteringTillFactory) { }
@@ -9,7 +10,6 @@ export class TillValueClass implements Tills {
         return {
             tillValue: (condition: string): COUNTER & Returns => {
                 let condtionedArrayOrObj: any[] | Object = this.mixed;
-                if (Array.isArray(this.mixed)) condtionedArrayOrObj = this.mixed.slice();
 
                 let counterForThisType: COUNTER = (new DoFactory(this.mixed)).getCounter();
                 // console.log(counterForThisType);
@@ -29,7 +29,7 @@ export class TillValueClass implements Tills {
         let cond : string, value : string | number, keyInObj : string = '';
         [cond, value] = condition.trim().split(' ');
         if(typeof this.mixed[0] === 'object') [keyInObj , cond , value] = condition.trim().split(' ');
-        let val: any = parseInt(value);
+        let val: any = parseFloat(value);
         if (isNaN(val)) {
             val = value;
         }

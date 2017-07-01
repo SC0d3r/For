@@ -1,5 +1,6 @@
-import { Return ,  RETUNIQ} from './types';
-export class ReturnUniqClass implements Return{
+import { Return, RETUNIQ } from "../interfaces/types";
+
+export class ReturnUniqClass implements Return {
     constructor(private array : string[] | number[]){}
 
     getReturn() : RETUNIQ {

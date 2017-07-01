@@ -1,6 +1,7 @@
-import { ReturnsOfCounter } from './returnsOfCounterClass';
-import { DoFactory } from './doFactory.class';
-import { Tills, EnteringTillFactory, TillKey, COUNTER, Returns } from './types';
+
+import { Tills, EnteringTillFactory, TillKey, COUNTER, Returns } from "../interfaces/types";
+import { DoFactory } from "../doFactory/doFactory.class";
+import { ReturnsOfCounter } from "../returnsOfCounterClass";
 
 export class TillKeyClass implements Tills {
     constructor(private mixed: EnteringTillFactory) { }
@@ -9,7 +10,6 @@ export class TillKeyClass implements Tills {
         return {
             tillKey: (condition: string): COUNTER & Returns => {
                 let condtionedArrayOrObj: any[] | Object = this.mixed;
-                if (Array.isArray(this.mixed)) condtionedArrayOrObj = this.mixed.slice();
 
                 let counterForThisType: COUNTER = (new DoFactory(this.mixed)).getCounter();
                 // console.log(counterForThisType);
@@ -28,12 +28,8 @@ export class TillKeyClass implements Tills {
     private parseConditionOnThisVal(condition: string, onWhat: string | number): boolean {
         let [cond, value] = condition.trim().split(' ');
 
-        let val: any = parseInt(value);
+        let val: any = parseFloat(value);
         if (isNaN(val)) {
-            // if (cond === '<' ||
-            //     cond === '>' ||
-            //     cond === '<=' ||
-            //     cond === '>=') { console.error('asdsada');throw new Error('**not a valid value for this condition**'); }
             val = value;
         }
 

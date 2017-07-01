@@ -1,5 +1,5 @@
-import { ReturnsOfCounter } from './returnsOfCounterClass';
-import { Counter, COUNTER } from './types';
+import { ReturnsOfCounter } from './../returnsOfCounterClass';
+import { Counter, COUNTER } from './../interfaces/types';
 export class ObjectClass implements Counter {
     constructor(private obj: any) { }
 

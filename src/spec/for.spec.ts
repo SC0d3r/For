@@ -1,6 +1,24 @@
 import For = require("../for");
 
 describe('For : ', () => {
+    describe('static method For.disableCopy',() => {
+        it('should disable the copy of given array(default behavior)' , () => {
+            expect(For.__copy).toBeTruthy();
+
+            For.disableCopy();
+
+            expect(For.__copy).toBeFalsy();
+        });
+    });
+
+    describe('static method For.enableCopy',() => {
+        it('should enable the copy of given array(this is default behavior only call this if you have called the disbaleCopy)' , () => {
+            For.enableCopy();
+
+            expect(For.__copy).toBeTruthy();
+        });
+    });
+
     describe('.do : ', () => {
 
         it('should recieve a number and pass the (counter start from zero to that number) to a callback', () => {
@@ -11,7 +29,7 @@ describe('For : ', () => {
             expect(number).toBe(0 + 1 + 2 + 3 + 4);
         });
 
-        it('should recieve an array of numbers and pass (currentElement , index , CopyOfArray) to callback', () => {
+        it('should recieve an array of numbers and pass ( index , currentElement , CopyOfArray) to callback', () => {
             let sum = 0;
             let indexSum = 0;
             For([2, 3]).do((i: number, x: number, arr: number[]) => {
@@ -22,7 +40,7 @@ describe('For : ', () => {
             expect(indexSum).toBe(1);
         });
 
-        it('should recieve a string and pass (currentCharacter , index , stringItself) to callback', () => {
+        it('should recieve a string and pass (index , currentCharacter , stringItself) to callback', () => {
             let result = '';
             let wholeStr: string = '';
             let indexSum: number = 0;
@@ -37,7 +55,7 @@ describe('For : ', () => {
         });
 
 
-        it('should recieve an array of strings and pass (currentElement , index , CopyOfArray) to callback', () => {
+        it('should recieve an array of strings and pass (index , currentElement  , CopyOfArray) to callback', () => {
             let sum = '';
             let indexSum = 0;
             For(['god', 'sake']).do((i: number, x: string, arr: string[]) => {
@@ -61,7 +79,7 @@ describe('For : ', () => {
             expect(fullName).toBe('godsake');
         });
 
-        it('should recieve an array of obj and pass (key , value) to the callback', () => {
+        it('should recieve an array of objs and pass (key , value) to the callback', () => {
             let arr = [{ name: 'god' }, { name: 'sake' }];
             let fullName: string = '';
             For(arr).do((key: string, value: { name: string }) => {
@@ -71,7 +89,7 @@ describe('For : ', () => {
             expect(fullName).toBe('godsake');
         });
 
-        it('shouldd recieve a function and call that function till it return falsy and pass the return of that function to do', () => {
+        it('should recieve a function and call that function till it return falsy and pass the return of that function to callback', () => {
             function reverser(array: string[]) {
                 return function () {
                     return array.pop();
@@ -93,6 +111,9 @@ describe('For : ', () => {
             const a = [1, 2, 3];
             const result = For(a).returnSum();
             expect(result).toBe(6);
+
+            const temp = For(20).returns;
+            expect(For(temp).returnSum()).toBe(190);
         });
 
         it('should recieve an array of strings and return sum of the items of array', () => {
@@ -156,6 +177,9 @@ describe('For : ', () => {
                 sum += val;
             });
             expect(sum).toBe(4);
+            let arr = For(20).returns;
+            let newArr = For(arr).tillKey('<= 12').returns;
+            expect(newArr.length).toBe(13);
         });
 
         it('should recieve a condition and return till condtion = is true', () => {
@@ -185,7 +209,7 @@ describe('For : ', () => {
             expect(sum).toBe('godsake');
         });
 
-        it('shouldd throw if the condition is wrong', () => {
+        it('should throw if the condition is wrong', () => {
             let sum = '';
             function a() {
                 For([2, 4]).tillKey('><= 2').do((index: number, val: number, arr: number[]) => {
@@ -196,7 +220,7 @@ describe('For : ', () => {
             expect(a).toThrow();
         });
 
-        it('cann be used to get the elements met the condition with returns ',() => {
+        it('can be used to get the elements that they have met the condition with returns ',() => {
             let a = For(4).do().returns;
             let res = For(a).tillKey('<= 2').returns;
             expect(res).toEqual([0 , 1, 2]);
@@ -229,6 +253,10 @@ describe('For : ', () => {
                 sum += val;
             });
             expect(sum).toBe(1);
+
+            let temp = [1,2,-4,54,234,-6,33,123,-345];
+            let result = For(temp).tillValue('> -6').returns;
+            expect(result).toEqual([1,2,-4,54,234,33,123]);
         });
 
         it('should recieve a condition and return till condtion > is true', () => {
@@ -266,7 +294,7 @@ describe('For : ', () => {
             expect(sum).toBe(56);
         });
 
-        it('shouldd throw if the condition is wrong', () => {
+        it('should throw if the condition is wrong', () => {
             let sum = '';
             function a() {
                 For([2, 4]).tillValue('><= 2').do((index: number, val: number, arr: number[]) => {
@@ -277,7 +305,7 @@ describe('For : ', () => {
             expect(a).toThrow();
         });
 
-        it('cann be used to get the elements met the condition with returns ',() => {
+        it('cann be used to get the elements that they have met the condition with returns ',() => {
             let a = For(10).do().returns;
             let res = For(a).tillValue('<= 2').returns;
             expect(res).toEqual([0 , 1, 2]);
@@ -286,7 +314,7 @@ describe('For : ', () => {
     });
 
     describe('.do().returns', () => {
-        it('should return a of original array array', () => {
+        it('should return a copy of original array', () => {
             let a = [1, 2, 3, 4, 5];
             let newA = For(a).do().returns;
             expect(a).toEqual(newA);
@@ -352,7 +380,7 @@ describe('For : ', () => {
 
 
     describe('.do().prepend', () => {
-        it('should recieve an array and prepends the result in front of it', () => {
+        it('should recieve an array and prepend the result in front of it', () => {
             let originalArray = [1, 2, 3, 4];
             let resultArray: any[] = [56, 87];
             For(originalArray).do(() => 2).prepend(resultArray);

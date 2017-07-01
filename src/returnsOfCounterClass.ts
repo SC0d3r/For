@@ -1,57 +1,86 @@
-import { Returns } from "./types";
+
+import { Returns } from "./interfaces/types";
 
 export class ReturnsOfCounter<T> {
-    private defaultReturns: any[] = [];
-    constructor(private arr: T[]) {
-        let temp : any[] = [];
-        if(typeof arr === 'number') {
-            for(var i = 0;i < arr;i++) {
-                temp.push(i);
-            }
-            this.arr = <any>temp;
-        }else if(typeof arr === 'string'){
-            for(var i = 0;i < (<any>arr).length;i++) {
-                temp.push(arr[i]);
-            }
-            this.arr = <any>temp;
-        }else if(typeof arr === 'object' && !Array.isArray(arr)){
-            let keys = Object.keys(arr);
-            for(let i = 0;i < keys.length ; i++){
-                let currentKey = keys[i];
-                let currentValue = arr[currentKey];
-                temp[i] = [currentKey , currentValue];
-            }
-            this.arr = <any>temp;
-        }
-     }
+    private returnObjs: Returns;
+    constructor(private mixed?: T[]) {
+        mixed ? this.createReutrns() : '';
+    }
 
-    getReturns(): Returns {
-        let arr = this.arr;
-        return {
-            returns: (arr.slice ? arr.slice() : arr),
+   
+    private createReutrns(){
+
+        this.makeMixedObj();
+
+        let arr = <T[]>this.mixed;
+        let length = arr.length;
+
+        this.returnObjs =  {
+            returns: arr,
             assign: (array: any[]) => {
                 if (!Array.isArray(array)) throw new Error('you can only assign to arrays');
-                let length = arr.length;
                 for (var i = 0; i < length; i++) {
                     array[i] = arr[i];
                 }
             },
             append: (array: any[]) => {
                 if (!Array.isArray(array)) throw new Error('you can only assign to arrays');
-                let length = arr.length;
-                if (length === undefined) array.push(arr); // arr here is just a string or number
+                // if (length === undefined) array.push(arr); // arr here is just a string or number
                 for (var i = 0; i < length; i++) {
                     array.push(arr[i]);
                 }
             },
             prepend: (array: any[]) => {
                 if (!Array.isArray(array)) throw new Error('you can only assign to arrays');
-                let length = arr.length;
-                if (length === undefined) array.unshift(arr); // arr here is just a string or number
+                // if (length === undefined) array.unshift(arr); // arr here is just a string or number
                 for (var i = 0; i < length; i++) {
                     array.unshift(arr[i]);
                 }
             }
         }
     }
+
+
+    private makeMixedObj() {
+        let resultArray = this.initializeArrayAccordingToType(<any>this.mixed, typeof this.mixed);
+        if (resultArray.length !== 0) this.mixed = resultArray;
+    }
+
+    private initializeArrayAccordingToType(mixed: (string | number | Object), type: string): any[] {
+        let temp: any[] = [];
+        if (type === 'number') {
+            for (var i = 0; i < mixed; i++) {
+                temp.push(i);
+            }
+        } else if (type === 'string') {
+            let length = (<any>mixed).length;
+            for (var i = 0; i < length; i++) {
+                temp.push(mixed[i]);
+            }
+        } else if (type === 'object' && !Array.isArray(mixed)) {
+            let keys = Object.keys(mixed);
+            let length = keys.length;
+            for (let i = 0; i < length; i++) {
+                let currentKey = keys[i];
+                let currentValue = mixed[currentKey];
+                temp[i] = [currentKey, currentValue];
+            }
+        }
+        return temp;
+    }
+
+
+    // --- public apis
+
+     
+    public getReturns(): Returns {
+        return this.returnObjs;
+    }
+
+    public setMixedObj(mixed : T[]) : ReturnsOfCounter<T>{
+        this.mixed = mixed;
+        this.createReutrns();
+        return this;
+    }
+
 }
