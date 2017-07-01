@@ -29,7 +29,7 @@ export class ReturnsOfCounter<T> {
     getReturns(): Returns {
         let arr = this.arr;
         return {
-            returns: (arr.slice ? arr.slice() : arr),
+            returns: (arr),
             assign: (array: any[]) => {
                 if (!Array.isArray(array)) throw new Error('you can only assign to arrays');
                 let length = arr.length;
