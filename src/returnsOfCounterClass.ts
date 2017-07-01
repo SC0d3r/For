@@ -1,4 +1,5 @@
-import { Returns } from "./types";
+
+import { Returns } from "./interfaces/types";
 
 export class ReturnsOfCounter<T> {
     private defaultReturns: any[] = [];
