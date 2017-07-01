@@ -1,17 +1,15 @@
 import { ReturnsOfCounter } from './../returnsOfCounterClass';
 import { Counter, COUNTER } from './../interfaces/types';
 export class NumberArrayClass implements Counter {
-    private copyNums: number[];
-    constructor(nums: number[]) {
-        this.copyNums = nums.slice();
+    constructor(private nums: number[]) {
     }
 
     getCounter(): COUNTER {
         return {
             do: (cb?: (index: number, currentElement: number, arr: number[]) => number) => {
-                let changesOnArray : number[] = this.copyNums;
-                for (var i = 0; i < this.copyNums.length; i++) {
-                    let ret = cb && cb(i, this.copyNums[i], this.copyNums);
+                let changesOnArray : number[] = this.nums;
+                for (var i = 0; i < this.nums.length; i++) {
+                    let ret = cb && cb(i, this.nums[i], this.nums);
                     if(typeof ret === 'number') changesOnArray[i] = ret;
                     else changesOnArray[i] = ret || changesOnArray[i];
                 }
