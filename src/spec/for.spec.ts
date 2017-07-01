@@ -1,6 +1,24 @@
 import For = require("../for");
 
 describe('For : ', () => {
+    describe('static method For.disableCopy',() => {
+        it('should disable the copy of given array(default behavior)' , () => {
+            expect(For.__copy).toBeTruthy();
+
+            For.disableCopy();
+
+            expect(For.__copy).toBeFalsy();
+        });
+    });
+
+    describe('static method For.enableCopy',() => {
+        it('should enable the copy of given array(this is default behavior only call this if you have called the disbaleCopy)' , () => {
+            For.enableCopy();
+
+            expect(For.__copy).toBeTruthy();
+        });
+    });
+
     describe('.do : ', () => {
 
         it('should recieve a number and pass the (counter start from zero to that number) to a callback', () => {
@@ -93,6 +111,9 @@ describe('For : ', () => {
             const a = [1, 2, 3];
             const result = For(a).returnSum();
             expect(result).toBe(6);
+
+            const temp = For(20).returns;
+            expect(For(temp).returnSum()).toBe(190);
         });
 
         it('should recieve an array of strings and return sum of the items of array', () => {
@@ -156,6 +177,9 @@ describe('For : ', () => {
                 sum += val;
             });
             expect(sum).toBe(4);
+            let arr = For(20).returns;
+            let newArr = For(arr).tillKey('<= 12').returns;
+            expect(newArr.length).toBe(13);
         });
 
         it('should recieve a condition and return till condtion = is true', () => {
@@ -229,6 +253,10 @@ describe('For : ', () => {
                 sum += val;
             });
             expect(sum).toBe(1);
+
+            let temp = [1,2,-4,54,234,-6,33,123,-345];
+            let result = For(temp).tillValue('> -6').returns;
+            expect(result).toEqual([1,2,-4,54,234,33,123]);
         });
 
         it('should recieve a condition and return till condtion > is true', () => {
