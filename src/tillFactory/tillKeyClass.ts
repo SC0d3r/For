@@ -10,7 +10,6 @@ export class TillKeyClass implements Tills {
         return {
             tillKey: (condition: string): COUNTER & Returns => {
                 let condtionedArrayOrObj: any[] | Object = this.mixed;
-                if (Array.isArray(this.mixed)) condtionedArrayOrObj = this.mixed.slice();
 
                 let counterForThisType: COUNTER = (new DoFactory(this.mixed)).getCounter();
                 // console.log(counterForThisType);
@@ -31,10 +30,6 @@ export class TillKeyClass implements Tills {
 
         let val: any = parseInt(value);
         if (isNaN(val)) {
-            // if (cond === '<' ||
-            //     cond === '>' ||
-            //     cond === '<=' ||
-            //     cond === '>=') { console.error('asdsada');throw new Error('**not a valid value for this condition**'); }
             val = value;
         }
 
