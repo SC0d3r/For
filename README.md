@@ -27,6 +27,7 @@ const For = require('for-ease');
 import For = require('for-ease');
 ```
 
+
 # Examples
 
 ## `do` method :
@@ -364,9 +365,72 @@ For(originalArray).do((index , value) => value * value).prepend(resultArray);
 ```
 
 
+## **Performance** :
+
+### Static Methods 
+> static methods are only available from version 1.1.0 and later
+
+### For.disableCopy
+ `For` function by **`defualt`** makes a `copy` of given array  but you can **`disable`** this behavior for better **performance** by calling this method
+
+```javascript
+For.disableCopy();
+```
+
+>* **Note** : **`returnSorted`** method always change the copy of given array not the original 
+
+>* **Note** : if you disable the *`copy`* the `return` of `callback` function will change the original array (if callback does not return anything original array remains `intact`) for example : 
+
+```javascript
+let originalArr = [1, 2, 3];
+let result = For(originalArr).do(() => 2).returns;
+// now result and originalArr are [2,2,2];
+// defualt behavior(if copy is enable) originalArr remains [1,2,3]
+// but result will be [2,2,2]
+```
+### For.enableCopy
+> this is the defualt behavior of **`For`** function 
+```javascript
+For.enableCopy();//only call this if you have already disabled copying
+```
+
+> note : you can check if copying is on or off by logging the For.__copy property (true means it copies given arrays)
 
 
+### Time Test : 
+> I ran this test several times in different machines
+```javascript
 
+For.disableCopy();//disabling the copy for better performance
+
+
+const number = 6000000
+const arr = For(number).returns; // this command just make us the array
+//from 0 to 5999999
+
+function a(){ } // dummy function 
+
+console.time('For');
+For(arr).do(a);
+console.timeEnd('For')
+
+console.time('default for');
+for (let i = 0; i < arr.length; i++) {
+    a();
+}
+console.timeEnd('default for');
+
+console.time('forEach');
+arr.forEach(a);
+console.timeEnd('forEach');
+
+For: 36.849ms
+default for: 25.236ms
+forEach: 294.389ms
+
+```
+### **Final Note** : Dont use **`array.forEach`** it is so **slow**
+#### dont believe , just run the test and see the result on your machine.
 #
 
 [**source code on github**](https://github.com/SC0d3r/For)
