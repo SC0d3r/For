@@ -1,5 +1,5 @@
-import { ReturnsOfCounter } from './returnsOfCounterClass';
-import { Counter, COUNTER } from './types';
+import { ReturnsOfCounter } from './../returnsOfCounterClass';
+import { Counter, COUNTER } from './../interfaces/types';
 export class StringArrayClass implements Counter {
     private copyOfArray: string[];
     constructor(private strArray: string[]) { this.copyOfArray = this.strArray.slice(); }

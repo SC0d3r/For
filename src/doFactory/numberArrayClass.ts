@@ -1,5 +1,5 @@
-import { ReturnsOfCounter } from './returnsOfCounterClass';
-import { Counter, COUNTER, Returns } from './types';
+import { ReturnsOfCounter } from './../returnsOfCounterClass';
+import { Counter, COUNTER } from './../interfaces/types';
 export class NumberArrayClass implements Counter {
     private copyNums: number[];
     constructor(nums: number[]) {

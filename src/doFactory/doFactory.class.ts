@@ -5,7 +5,9 @@ import { StringArrayClass } from './stringArrayClass';
 import { StringClass } from './stringClass';
 import { NumberArrayClass } from './numberArrayClass';
 import { NumberClass } from './numberClass';
-import { Mixed, COUNTER, Counter } from "./types";
+
+import { Counter, COUNTER, Mixed } from './../interfaces/types';
+
 export class DoFactory implements Counter {
     private counter: COUNTER
     constructor(private mixedObj: Mixed) {

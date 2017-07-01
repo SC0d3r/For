@@ -1,5 +1,6 @@
-import { ReturnsOfCounter } from './returnsOfCounterClass';
-import { Counter, COUNTER } from './types';
+import { ReturnsOfCounter } from './../returnsOfCounterClass';
+import { Counter, COUNTER } from "../interfaces/types";
+
 export class ObjectArrayClass implements Counter {
     private copyOfArray: Object[];
     constructor(private objectArray: Object[]) { this.copyOfArray = this.objectArray.slice(); }
