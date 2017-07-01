@@ -1,9 +1,10 @@
 import { ReturnsOfCounter } from './returnsOfCounterClass';
-import { TillFactory } from './tillFactory.class';
-import { ReturnFactory } from './returnFactory.class';
-import { DoFactory } from './doFactory.class';
-import { Mixed, COUNTER, RETURN, EnteringTillFactory, TILLS } from "./types";
+import { TillFactory } from './tillFactory/tillFactory.class';
+import { ReturnFactory } from './returnFactory/returnFactory.class';
+import { DoFactory } from './doFactory/doFactory.class';
 
+
+import { COUNTER, RETURN, TILLS, Mixed, EnteringTillFactory } from "./interfaces/types";
 
 type ForReturns = COUNTER & RETURN & TILLS;
 
