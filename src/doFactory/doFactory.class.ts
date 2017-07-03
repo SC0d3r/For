@@ -8,50 +8,42 @@ import { NumberClass } from './numberClass';
 
 import { Counter, COUNTER, Mixed } from './../interfaces/types';
 
-export class DoFactory implements Counter {
-    private counter: COUNTER
-    constructor(private mixedObj ?: Mixed) {
-        mixedObj ? this.makeCounter() : '';
+export class DoFactory implements Counter<DoFactory> {
+    private _counter: COUNTER
+    private _classes: Object = {};
+    constructor(private _mixedObj?: Mixed) {
+        this._makeClasses();
+        _mixedObj ? this.makeCounter() : '';
     }
 
+    private _makeClasses(): void {
+        this._classes['function'] = new FunctionClass();
+        this._classes['string'] = new StringClass();
+        this._classes['number'] = new NumberClass();
+        this._classes['object'] = new ObjectClass();
+        this._classes['string[]'] = new StringArrayClass();
+        this._classes['number[]'] = new NumberArrayClass();
+        this._classes['object[]'] = new ObjectArrayClass();
+    }
 
     private makeCounter(): void {
-        if (typeof this.mixedObj === 'function') {
-            this.counter = (new FunctionClass(this.mixedObj)).getCounter();
-        } else if (typeof this.mixedObj === 'number') {
-
-            this.counter = (new NumberClass(<number>this.mixedObj)).getCounter();
-
-        } if (typeof this.mixedObj === 'string') {
-
-            this.counter = (new StringClass(<string>this.mixedObj)).getCounter();
-
-        } else if (Array.isArray(this.mixedObj)) {
-
-            if (typeof this.mixedObj[0] === 'number') {
-
-                this.counter = (new NumberArrayClass(<number[]>this.mixedObj)).getCounter();
-
-            } else if (typeof this.mixedObj[0] === 'string') {
-                
-                this.counter = (new StringArrayClass(<string[]>this.mixedObj)).getCounter();
-            }else if(typeof this.mixedObj[0] === 'object'){
-                this.counter = (new ObjectArrayClass(<Object[]>this.mixedObj)).getCounter();
-            }
-
-        } else if (typeof this.mixedObj === 'object') {
-            this.counter = (new ObjectClass(this.mixedObj)).getCounter();
-        }
-
+        this._counter = this._classes[this._getMixedObjType()]
+            .setMixedObj(this._mixedObj).getCounter();
     }
 
-    public setMixedObj(obj : Mixed) : DoFactory{
-        this.mixedObj = obj;
+    private _getMixedObjType(): string {
+        const mixedObj = this._mixedObj;
+        const isMixedObjArray = Array.isArray(mixedObj);
+        return isMixedObjArray ? (typeof (<string | number | Object>mixedObj)[0]) + '[]' : typeof mixedObj;
+    }
+
+    public setMixedObj(obj: Mixed): DoFactory {
+        this._mixedObj = obj;
         this.makeCounter();
         return this;
     }
 
     public getCounter(): COUNTER {
-        return this.counter;
+        return this._counter;
     }
 }

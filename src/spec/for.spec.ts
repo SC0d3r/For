@@ -203,7 +203,7 @@ describe('For : ', () => {
             let sum = '';
             let arr = [{ name: 'sasan' }, { name: 'godsake' }];
             For(arr).tillKey('= 1').do((index: number, val: { name: string }, arr: number[]) => {
-                console.log(index, val);
+                // console.log(index, val);
                 sum += val.name;
             });
             expect(sum).toBe('godsake');

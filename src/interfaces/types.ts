@@ -1,4 +1,4 @@
-export type Mixed = number | number[] | string | string[] | Object | Object[];
+export type Mixed = Function | number | number[] | string | string[] | Object | Object[];
 
 // -------- return of counters
 export type Returns = {
@@ -10,8 +10,9 @@ export type Returns = {
 // -------- counters
 export type COUNTER = { do: (key?: any, value?: any, copyOfArr?: any[]) => Returns };
 
-export interface Counter {
+export interface Counter<CLASS> {
     getCounter(): COUNTER;
+    setMixedObj(mixed : Mixed) : CLASS;
 }
 
 
