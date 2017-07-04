@@ -5,7 +5,7 @@
   "main": "./dist/for.js",
   "scripts": {
     "test": "jasmine-node-karma ./dist/spec/for.spec.js --color",
-    "bundle": "browserify ./dist/for.js -o ./bundle/index.js"
+    "bundle": "browserify ./dist/index.js -o ./bundle/for-ease.bundle.js"
   },
   "keywords": [
     "For",
