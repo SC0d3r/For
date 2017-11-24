@@ -1,11 +1,15 @@
 {
   "name": "for-ease",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "a simple library for itrating over anything",
   "main": "./dist/for.js",
   "scripts": {
     "test": "jasmine-node-karma ./dist/spec/for.spec.js --color",
     "bundle": "browserify ./dist/index.js -o ./bundle/for-ease.bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SC0d3r/For.git"
   },
   "keywords": [
     "For",
